@@ -58,14 +58,21 @@
   },
   "resources": [
     {
-      "type": "Microsoft.Compute/availabilitySets",
+      "comments": "This is our availability set where the VMs will be placed into. Make sure to use the correct API version and set the SKU to aligned in order to support managed disks",
       "name": "[variables('availabilitySetName')]",
-      "apiVersion": "2016-04-30-preview",
+      "type": "Microsoft.Compute/availabilitySets",
       "location": "[resourceGroup().location]",
+      "apiVersion": "2017-03-30",
+      "dependsOn": [],
+      "tags": {
+        "displayName": "test"
+      },
       "properties": {
-        "platformFaultDomainCount": "2",
-        "platformUpdateDomainCount": "2",
-        "managed": "true"
+        "platformUpdateDomainCount": 2,
+        "platformFaultDomainCount": 2
+      },
+      "sku": {
+        "name": "Aligned"
       }
     },
     {
